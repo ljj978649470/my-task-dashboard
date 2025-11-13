@@ -131,7 +131,6 @@ const TaskDashboard: React.FC = () => {
   const filteredTasks = testData.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase())
   );
-  console.log(filteredTasks, "filteredTasks");
 
   const ongoingTasks: Task[] = filteredTasks.filter(
     (t) => t.status === "ongoing"
