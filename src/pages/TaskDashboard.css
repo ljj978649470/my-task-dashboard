@@ -1,0 +1,28 @@
+/* .taskDashboardPage {
+  padding: 20px;
+} */
+.yemei {
+  width: 100%;
+  height: 90px;
+  background-color: red;
+}
+.heard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+.main {
+  padding: 40px 360px;
+}
+.title {
+  font-family: PingFang SC;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0px;
+}
+.taskDashboardPage {
+  background-color: darkgrey;
+  padding: 20px;
+}
