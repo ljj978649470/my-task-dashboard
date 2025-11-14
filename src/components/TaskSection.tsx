@@ -1,94 +1,63 @@
 import React, { useMemo, useState } from "react";
-import { Button, Table, Tooltip, Avatar, Tag } from "antd";
-
-import expandIcon from "../assets/expandIcon.png";
+import { Button } from "antd";
+import GameTag from "./GameTag";
+import CustomTable, { type HistoryRecord } from "./CustomTable";
+import AvatarGroupLegacy, { type User } from "./AvatarGroupLegacy";
+import TimeRangeCard from "./TimeRangeCard";
+import doubleleft from "../assets/doubleleft.svg";
+import IconMore from "../assets/iconMore.svg";
 
 import "./TaskSection.css";
 
-type TaskState = "ongoing" | "paused" | "notStarted" | "historical";
+type SymposiumState = "ongoing" | "paused" | "notStarted" | "historical";
 
+interface GameTag {
+  type: "timi" | "tencent";
+  name: string;
+}
+export interface SymposiumData {
+  id: string;
+  title: string;
+  tag: GameTag[];
+  status: SymposiumState;
+  startTime: string;
+  endTime: string;
+  project: string;
+  creator: User[];
+  assistant: User[];
+  listdata?: HistoryRecord[];
+}
 interface TaskSectionProps {
-  tasks: Task;
-}
-export interface Member {
-  id: number;
-  name: string;
-  avatar: string;
-}
-interface HistoryRecord {
-  key: string;
-  title: string;
-  time: string;
-  address: string;
-  name: string;
+  tasks: SymposiumData;
 }
 
-export interface Task {
-  id: string;
-  title: string;
-  tag: string[];
-  status: string;
-  startTime: string;
-  endTime: string;
-  project: string;
-  creator: Member[];
-  assistant: Member[];
-  listdata?: HistoryRecord[];
-}
-
-export interface Task {
-  id: string;
-  title: string;
-  tag: string[];
-  status: string;
-  startTime: string;
-  endTime: string;
-  project: string;
-  creator: Member[];
-  assistant: Member[];
-  listdata?: HistoryRecord[];
-}
-const columns = [
-  {
-    title: "title",
-    dataIndex: "title",
-    key: "title",
-  },
-  {
-    title: "time",
-    dataIndex: "time",
-    key: "time",
-  },
-  {
-    title: "address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "name",
-    dataIndex: "name",
-    key: "name",
-  },
-];
-
-function renderButtons(status: TaskState) {
+function renderButtons(status: SymposiumState) {
   switch (status) {
     case "ongoing":
       return (
         <>
-          <Button onClick={() => alert("进入直播")}>进入直播</Button>
+          <Button className={`btn ongoing`} onClick={() => alert("进入直播")}>
+            进入直播
+          </Button>
         </>
       );
     case "paused":
       return (
         <>
-          <Button onClick={() => alert("继续直播")}>继续直播</Button>
+          <Button className={`btn paused`} onClick={() => alert("继续直播")}>
+            继续直播
+          </Button>
         </>
       );
     case "notStarted":
       return (
         <>
-          <Button onClick={() => alert("开始直播")}>开始直播</Button>
+          <Button
+            className={`btn notStarted`}
+            onClick={() => alert("开始直播")}
+          >
+            开始直播
+          </Button>
         </>
       );
     case "historical":
@@ -99,93 +68,95 @@ function renderButtons(status: TaskState) {
 }
 const TaskSection: React.FC<TaskSectionProps> = ({ tasks }) => {
   const {
-    status = "ongoing" as TaskState,
+    status = "ongoing" as SymposiumState,
     tag,
     startTime,
     endTime,
     project,
     creator,
-    assistant,
     listdata = [],
     title,
   } = tasks;
   const [isExpand, setIsExpand] = useState(false);
   const renderButton = useMemo(() => {
-    return renderButtons(status as TaskState);
+    return renderButtons(status as SymposiumState);
   }, [status]);
   const afterStyle = status;
   const showisExpand = listdata?.length > 0;
+
   return (
     <div className="tsaskSection">
-      <div className={`tsaskSectionContent ${afterStyle}`}>
-        <div className="taskSectionMian">
+      <div className={`tsaskSection-content ${afterStyle}`}>
+        <div className="taskSection-mian">
           {showisExpand && (
-            <div className="expandBox" onClick={() => setIsExpand(!isExpand)}>
-              <img src={expandIcon} alt="" />
+            <div className="expand-box" onClick={() => setIsExpand(!isExpand)}>
+              <div className={`triangle ${isExpand ? "open" : ""}`}></div>
             </div>
           )}
 
-          <div className="info">
+          <div className={`info ${!showisExpand ? "pad12" : ""}`}>
             <div className="tags">
-              {tag.map((t, index) => (
-                <Tag color="blue" key={index}>
-                  {t}
-                </Tag>
+              {tag.map((t) => (
+                <GameTag type={t.type} key={t.type} dot={t.type === "tencent"}>
+                  {t.name}
+                </GameTag>
               ))}
             </div>
             <div className="npg">
               <p>{title}</p>
-              <p>{">>"}</p>
+              <img src={doubleleft} alt="" />
               <p>product</p>
             </div>
             <div className="users">
-              <div className="creator">
-                <p className="label">创建者</p>
-                {assistant.map((m) => (
-                  <Tooltip title={m.name} key={m.id}>
-                    <Avatar size="small" src={m.avatar} />
-                  </Tooltip>
-                ))}
-              </div>
-
-              <div className="assistant">
-                <p className="label">协助者</p>
-                {creator.map((m) => (
-                  <Tooltip title={m.name} key={m.id}>
-                    <Avatar size="small" src={m.avatar} />
-                  </Tooltip>
-                ))}
-              </div>
+              <AvatarGroupLegacy
+                label="创建者"
+                data={creator}
+                size="small"
+                maxCount={4}
+                maxStyle={{
+                  color: "#00000096",
+                  backgroundColor: "#DDDDDD",
+                  cursor: "pointer",
+                }}
+                maxPopoverTrigger="click"
+              />
+              <AvatarGroupLegacy
+                label="协助者"
+                data={creator}
+                size="small"
+                maxCount={4}
+                maxStyle={{
+                  color: "#00000096",
+                  backgroundColor: "#DDDDDD",
+                  cursor: "pointer",
+                }}
+                maxPopoverTrigger="click"
+              />
             </div>
           </div>
 
-          <div className="MeetingInfo">
-            <div className="time">
-              <p>{startTime} </p>
-              <p>|</p>
-              <p>{endTime}</p>
-            </div>
-            <div className="venue">
-              <p>{project}</p>
-            </div>
+          <div className="meeting-info">
+            <TimeRangeCard
+              startTime={startTime}
+              endTime={endTime}
+              project={project}
+              showTime={true}
+            />
           </div>
           <div className="actions">
             {renderButton}
-            <Button className="action-more" onClick={() => alert("点击更多")}>
-              更多
-            </Button>
+            <img
+              src={IconMore}
+              className="action-more"
+              onClick={() => alert("点击更多")}
+            ></img>
           </div>
         </div>
         {showisExpand && (
           <div
-            className={`TaskSectionTable ${isExpand ? "expand" : "collapse"}`}
+            className={`task-section-table ${isExpand ? "expand" : "collapse"}`}
           >
-            <Table
-              columns={columns}
-              dataSource={listdata}
-              showHeader={false}
-              pagination={false}
-            />
+            <CustomTable historyRecord={listdata} />
           </div>
         )}
       </div>
