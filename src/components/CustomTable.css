@@ -1,0 +1,16 @@
+.custom-row {
+  color: #0b0b0ba6;
+}
+
+.custom-row:hover {
+  background-color: #ececec;
+  color: #0b0b0bd9;
+  cursor: pointer;
+}
+.time-box {
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
