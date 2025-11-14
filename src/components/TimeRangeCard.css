@@ -1,0 +1,88 @@
+.time-range-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  .format-one {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .fill {
+      color: #0b0b0b73;
+      margin: 8px 0;
+    }
+  }
+  .format-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    .fill {
+      font-family: PingFang SC;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0px;
+      text-align: center;
+      color: #0b0b0bd9;
+      margin: 0 4px;
+    }
+  }
+  .end-time,
+  .start-time {
+    font-family: PingFang SC;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #0b0b0bd9;
+    margin: 0;
+  }
+  .project {
+    position: relative;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+
+    p {
+      font-family: PingFang SC;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0px;
+      text-align: center;
+      color: #0b0b0bd9;
+      margin: 0;
+    }
+  }
+  .project::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 2px; /* 虚线宽度 */
+    height: 100%;
+    left: 0;
+    border-left: 2px solid #ececec; /* 左侧边框做虚线 */
+  }
+}
+.time-range-card::before,
+.time-range-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 2px; /* 虚线宽度 */
+  height: 100%;
+  border-left: 2px solid #ececec; /* 左侧边框做虚线 */
+}
+
+.time-range-card::before {
+  left: 0;
+}
+
+.time-range-card::after {
+  right: 0;
+}
