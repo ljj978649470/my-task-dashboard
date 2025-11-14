@@ -1,0 +1,16 @@
+.creator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .label {
+    font-family: PingFang SC;
+    font-weight: 400;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 23px;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    margin: 0 8px 0 0;
+    color: #0b0b0b73;
+  }
+}
