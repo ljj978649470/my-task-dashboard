@@ -1,28 +1,35 @@
-/* .taskDashboardPage {
-  padding: 20px;
-} */
-.yemei {
-  width: 100%;
-  height: 90px;
-  background-color: red;
+.taskDashboardPage {
+  background-color: #f5f5f5;
+  padding: 0px 20px 40px 20px;
 }
+
 .heard {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 40px;
-}
-.main {
-  padding: 40px 360px;
+  margin-bottom: 26px;
 }
 .title {
   font-family: PingFang SC;
   font-weight: 400;
   font-size: 18px;
+  leading-trim: NONE;
   line-height: 26px;
   letter-spacing: 0px;
+  color: #0b0b0bd9;
+  margin-bottom: 0;
 }
-.taskDashboardPage {
-  background-color: darkgrey;
-  padding: 20px;
+h2 {
+  font-family: PingFang SC;
+  font-weight: 400;
+  font-size: 18px;
+  leading-trim: NONE;
+  line-height: 26px;
+  letter-spacing: 0px;
+  margin-bottom: 12px;
+  color: #0b0b0bd9;
+}
+.main {
+  padding: 40px 360px;
 }
