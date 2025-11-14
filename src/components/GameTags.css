@@ -1,0 +1,32 @@
+.game-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  margin-right: 12px;
+}
+
+.game-tag--timi {
+  background: #e6e8f2;
+  color: #2b4096;
+  border-radius: 4px;
+}
+
+.game-tag--tencent {
+  background: #f4d7c3;
+  color: #a85212;
+  border-radius: 20px;
+}
+
+.game-tag .dot {
+  width: 6px;
+  height: 6px;
+  background: #d98639;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
